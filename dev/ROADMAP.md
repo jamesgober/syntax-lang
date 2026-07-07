@@ -18,7 +18,10 @@ Exit criteria:
 - [x] Every public item has rustdoc + a runnable example.
 - [x] Core invariants property-tested (losslessness, covering span, tiling, containment).
 
-## v1.0.0 - API freeze
-Public surface stable and frozen until 2.0.
-- [ ] docs/API.md marked stable; SemVer promise recorded.
-- [ ] Full test + benchmark suite green on all three platforms.
+## v1.0.0 - API freeze (DONE)
+Public surface stable and frozen until 2.0. No functional change from 0.2.0 — the
+commitment. Node/Element/Builder/BuildError + re-exports frozen; deliberately-left-out
+items (serde, mutable/fallible traversal, builder checkpoints) recorded in API.md as
+additive-later.
+- [x] docs/API.md marked stable; SemVer promise recorded.
+- [x] Full test + benchmark suite green (Windows + WSL2 Ubuntu; MSRV 1.85).

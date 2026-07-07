@@ -16,7 +16,7 @@
 </div>
 <br>
 
-> **Status: pre-1.0.** The surface below is designed across the 0.x series and freezes at `1.0.0`, after which it follows Semantic Versioning: no breaking change before `2.0`, additions in minor releases, MSRV rising only in a minor.
+> **Status: stable as of `1.0.0`.** The surface below is frozen under Semantic Versioning — no breaking change before `2.0`, additions in minor releases, MSRV (Rust 1.85) rising only in a minor. See [Stability & SemVer](#stability--semver).
 
 A lossless concrete syntax tree (CST) with trivia — the substrate for formatters, language servers, and tree-sitter-style generation.
 
@@ -33,6 +33,7 @@ A lossless concrete syntax tree (CST) with trivia — the substrate for formatte
   - [Re-exports](#re-exports)
 - **[Invariants](#invariants)**
 - **[Feature Flags](#feature-flags)**
+- **[Stability & SemVer](#stability--semver)**
 
 <br><br>
 
@@ -423,6 +424,35 @@ The following hold for any tree built from a gapless token stream (a lossless le
 | Feature | Default | Effect |
 |---|---|---|
 | `std` | yes | Pulls in the standard library; forwarded to `token-lang/std` and `span-lang/std`. Without it the crate is `no_std` (it always needs `alloc` for the child vectors). |
+
+<hr>
+<br>
+
+## Stability & SemVer
+
+As of `1.0.0` the surface above is **frozen**: no breaking change ships before a
+`2.0`, additions arrive only in minor releases, and the MSRV (Rust 1.85) rises only
+in a minor. The frozen surface is exactly:
+
+- **`Node<K>`** — `new`, `kind`, `span`, `is_empty`, `len`, `children`,
+  `child_nodes`, `child_tokens`, `descendants`, `tokens`, `text`.
+- **`Element<K>`** — the `Node` / `Token` variants and `span`, `kind`, `as_node`,
+  `as_token`, `is_node`, `is_token`.
+- **`Builder<K>`** — `new`, `is_empty`, `start_node`, `token`, `finish_node`,
+  `finish`, plus `Default`.
+- **`BuildError`** — the five variants (`#[non_exhaustive]`, so matching must
+  include a wildcard arm), `Display`, and `core::error::Error`.
+- **Re-exports** — `Token`, `TokenKind`, `Symbol`, `Span`, `Spanned`.
+
+What is deliberately left out, and can be added later without a breaking change:
+
+- A `serde` feature deriving `Serialize` / `Deserialize` on the tree.
+- A mutable or fallible traversal, or a checkpoint/wrap-retroactively builder move.
+- Convenience trivia filters gated on `K: TokenKind` (today a caller writes
+  `tokens().filter(|t| !t.is_trivia())`).
+
+Because `BuildError` is `#[non_exhaustive]`, adding a variant is not a breaking
+change; a downstream `match` on it must already carry a `_` arm.
 
 <hr>
 

@@ -29,7 +29,7 @@
         <strong>MSRV is 1.85+</strong> (Rust 2024 edition). <code>no_std</code> with <code>alloc</code>; <code>#![forbid(unsafe_code)]</code>.
     </p>
     <blockquote>
-        <strong>Status: pre-1.0, in active development.</strong> The public API is being designed across the 0.x series and frozen at <code>1.0.0</code>. See <a href="./CHANGELOG.md"><code>CHANGELOG.md</code></a>.
+        <strong>Status: stable.</strong> The public API is frozen as of <code>1.0.0</code> and follows Semantic Versioning &mdash; no breaking changes before <code>2.0</code>. See <a href="./docs/API.md"><code>docs/API.md</code></a> for the frozen surface and <a href="./CHANGELOG.md"><code>CHANGELOG.md</code></a>.
     </blockquote>
 </div>
 
@@ -66,7 +66,7 @@ Both traversals keep their work stack on the heap and borrow the tree, so neithe
 
 ```toml
 [dependencies]
-syntax-lang = "0.2"
+syntax-lang = "1"
 ```
 
 Or from the terminal:

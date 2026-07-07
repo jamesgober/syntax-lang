@@ -21,6 +21,21 @@
 
 ---
 
+## [1.0.0] - 2026-07-01
+
+API freeze. The tree, builder, and traversal surface is stable and will not change
+in a breaking way before `2.0`. No functional API changes from `0.2.0` — this
+release is the commitment.
+
+### Changed
+
+- The public API is declared stable under Semantic Versioning; `docs/API.md`
+  catalogues the frozen surface, the SemVer promise, and what is deliberately left
+  out (a `serde` feature, mutable/fallible traversal, builder checkpoints — all
+  addable later without a break).
+
+---
+
 ## [0.2.0] - 2026-07-01
 
 The core, front-loaded: the scaffold becomes a working lossless CST. A parser drives a `Builder` to assemble a tree of nodes and leaf tokens; trivia is preserved as ordinary leaves, so the source can be reproduced from the tree. This was the hard part of the roadmap and the roadmap put it first.
@@ -60,6 +75,7 @@ Initial scaffold and repository bootstrap. No domain logic yet &mdash; this rele
 - `.github/workflows/ci.yml` CI matrix; `deny.toml`, `clippy.toml`, `rustfmt.toml`.
 - `dev/DIRECTIVES.md` and `dev/ROADMAP.md` (committed engineering standards + plan).
 
-[Unreleased]: https://github.com/jamesgober/syntax-lang/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/jamesgober/syntax-lang/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/jamesgober/syntax-lang/compare/v0.2.0...v1.0.0
 [0.2.0]: https://github.com/jamesgober/syntax-lang/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/jamesgober/syntax-lang/releases/tag/v0.1.0
